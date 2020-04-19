@@ -1,38 +1,37 @@
 <template>
-<v-app>
-    <v-app-bar app color="primary" dark>
-        <div class="d-flex align-center">
-            <v-img alt="Vuetify Logo" class="shrink mr-2" contain src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png" transition="scale-transition" width="40" />
+<v-app id="inspire">
+    <v-navigation-drawer v-model="drawer" app clipped>
+        <Navigation />
+    </v-navigation-drawer>
 
-            <v-img alt="Vuetify Name" class="shrink mt-1 hidden-sm-and-down" contain min-width="100" src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png" width="100" />
-        </div>
-
-        <v-spacer></v-spacer>
-
-        <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
-            <span class="mr-2">Latest Release</span>
-            <v-icon>mdi-open-in-new</v-icon>
-        </v-btn>
+    <v-app-bar app clipped-left>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        <v-toolbar-title>Beehive - Farm Workshop</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
-        <Home />
+        <v-container>
+            <router-view></router-view>
+        </v-container>
     </v-content>
+
+    <v-footer app>
+        <span>&copy; {{new Date().getFullYear()}}</span>
+    </v-footer>
 </v-app>
 </template>
 
 <script>
-import Home from './components/Home';
-
+import Navigation from './components/Navigation'
 export default {
-    name: 'App',
-
     components: {
-        Home,
+        Navigation
     },
-
     data: () => ({
-        //
+        drawer: true,
     }),
-};
+    created() {
+        this.$vuetify.theme.dark = true
+    },
+}
 </script>

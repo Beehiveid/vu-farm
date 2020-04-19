@@ -14,16 +14,24 @@ export default {
     data: () => ({
         items: [{
                 "icon": "mdi-view-dashboard",
-                "title": "Dashboard"
+                "title": "Dashboard",
+                "to": "/"
             },{
                 "icon": "mdi-donkey",
-                "title": "Livestock"
+                "title": "Livestock",
+                "to": "/livestock"
             },{
                 "icon": "mdi-face",
-                "title": "Employee"
+                "title": "Employee",
+                "to": "/employee"
             },{
                 "icon": "mdi-warehouse",
-                "title": "Warehouse"
+                "title": "Warehouse",
+                "to": "/warehouse"
+            },{
+                "icon": null,
+                "title": "FAQ",
+                "to": "/faq"
             }]
     })
 }

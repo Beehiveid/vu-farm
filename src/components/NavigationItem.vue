@@ -1,5 +1,5 @@
 <template>
-<v-list-item link>
+<v-list-item link v-on:click="render(menu.to)">
     <v-list-item-action>
         <v-icon>{{menu.icon}}</v-icon>
     </v-list-item-action>
@@ -11,6 +11,11 @@
 
 <script>
 export default {
-    props: ['menu']
+    props: ['menu'],
+    methods: {
+        render(to) {
+            this.$router.push(to);
+        }
+    },
 }
 </script>
