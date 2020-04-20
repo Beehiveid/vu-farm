@@ -2,7 +2,7 @@
 <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
         <v-list dense>
-            <NavigationItem @clicked="onNavigationClicked" v-for="(item, index) in items" :key="index" v-bind:menu="item"></NavigationItem>
+            <navigation-item @clicked="onNavigationClicked" v-for="(item, index) in items" :key="index" v-bind:menu="item"></navigation-item>
         </v-list>
     </v-navigation-drawer>
 
@@ -66,7 +66,8 @@ export default {
         }
     },
     created() {
-        this.$vuetify.theme.dark = false
+        this.$vuetify.theme.dark = false,
+        this.$router.push("/");
     },
 }
 </script>
