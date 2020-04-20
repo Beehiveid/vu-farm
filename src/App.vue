@@ -1,7 +1,9 @@
 <template>
 <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
-        <Navigation />
+        <v-list dense>
+            <NavigationItem @clicked="onNavigationClicked" v-for="(item, index) in items" :key="index" v-bind:menu="item"></NavigationItem>
+        </v-list>
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left>
@@ -11,6 +13,12 @@
 
     <v-content>
         <v-container>
+            <v-row>
+                <v-col>
+                    <h3>{{title}}</h3>
+                </v-col>
+            </v-row>
+            <v-divider></v-divider>
             <router-view></router-view>
         </v-container>
     </v-content>
@@ -22,16 +30,43 @@
 </template>
 
 <script>
-import Navigation from './components/Navigation'
+import NavigationItem from './components/NavigationItem'
 export default {
     components: {
-        Navigation
+        NavigationItem
     },
     data: () => ({
         drawer: true,
+        title: "Dashboard",
+        items: [{
+            "icon": "mdi-view-dashboard",
+            "title": "Dashboard",
+            "to": "/"
+        }, {
+            "icon": "mdi-donkey",
+            "title": "Livestock",
+            "to": "/livestock"
+        }, {
+            "icon": "mdi-face",
+            "title": "Employee",
+            "to": "/employee"
+        }, {
+            "icon": "mdi-warehouse",
+            "title": "Warehouse",
+            "to": "/warehouse"
+        }, {
+            "icon": null,
+            "title": "FAQ",
+            "to": "/faq"
+        }]
     }),
+    methods: {
+        onNavigationClicked(value) {
+            this.title = value;
+        }
+    },
     created() {
-        this.$vuetify.theme.dark = true
+        this.$vuetify.theme.dark = false
     },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
 <v-container>
-    <div>This is FAQ page</div>
+    <div>This is Employees page</div>
 </v-container>
 </template>

@@ -14,6 +14,7 @@ export default {
     props: ['menu'],
     methods: {
         render(to) {
+            this.$emit('clicked',this.menu.title);
             this.$router.push(to);
         }
     },
