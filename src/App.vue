@@ -15,7 +15,7 @@
         <v-container>
             <v-row>
                 <v-col>
-                    <h3>{{title}}</h3>
+                    <h3>{{title}} - {{clicked}}</h3>
                 </v-col>
             </v-row>
             <v-divider></v-divider>
@@ -60,9 +60,20 @@ export default {
             "to": "/faq"
         }]
     }),
+    computed:{
+        clicked(){
+            return this.$store.state.count;
+        }
+    },
     methods: {
         onNavigationClicked(value) {
             this.title = value;
+
+            if(value == "FAQ"){
+                this.$store.dispatch("substract");
+            }else{
+                this.$store.dispatch("add");
+            }
         }
     },
     created() {
