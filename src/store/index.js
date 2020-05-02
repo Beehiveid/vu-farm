@@ -1,29 +1,48 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state:{
-        count:0
+  state: {
+    count: 0,
+    employees: [
+      {
+        title: "Developer",
+        name: "Nanda",
       },
-      mutations:{
-        add(state){
-          state.count++;
-        },
-        substract(state){
-          state.count--;
-        }
+      {
+        title: "Developer",
+        name: "Isti Paleman",
       },
-      actions:{
-        add(context){
-          context.commit("add");
-        },
-        substract(context){
-          context.commit("substract");
-        }
+    ],
+    livestocks: [
+      {
+        name: "cow-0001",
+        type: "Cow",
       },
-      getters:{
-        
-      }
-})
+      {
+        name: "chicken-0001",
+        type: "Chicken",
+      },
+    ],
+    warehouses: [],
+  },
+  mutations: {
+    add(state) {
+      state.count++;
+    },
+    substract(state) {
+      state.count--;
+    },
+  },
+  actions: {
+    add(context) {
+      context.commit("add");
+    },
+    substract(context) {
+      context.commit("substract");
+    },
+  },
+  getters: {},
+});

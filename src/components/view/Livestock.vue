@@ -102,15 +102,7 @@ export default {
 
     methods: {
         initialize() {
-            this.livestocks = [{
-                    name: "cow-0001",
-                    type: "Cow"
-                },
-                {
-                    name: "chicken-0001",
-                    type: "Chicken"
-                }
-            ]
+            this.livestocks = this.$store.state.livestocks
         },
 
         editItem(item) {

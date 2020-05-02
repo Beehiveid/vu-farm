@@ -102,19 +102,7 @@ export default {
 
     methods: {
         initialize() {
-            this.employees = [{
-                    title: "Developer",
-                    name: "Nanda"
-                },
-                {
-                    title: "Developer",
-                    name: "Isti Paleman"
-                },
-                {
-                    title: "Big Bossu",
-                    name: "Cipal"
-                },
-            ]
+            this.employees = this.$store.state.employees
         },
 
         editItem(item) {

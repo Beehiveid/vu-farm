@@ -102,7 +102,7 @@ export default {
 
     methods: {
         initialize() {
-            this.warehouses = []
+            this.warehouses = this.$store.state.warehouses
         },
 
         editItem(item) {
