@@ -2,12 +2,12 @@
 <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
         <v-list dense>
-            <navigation-item @clicked="onNavigationClicked" v-for="(item, index) in items" :key="index" v-bind:menu="item"></navigation-item>
+            <navigation-item v-for="(item, index) in items" :key="index" v-bind:menu="item"></navigation-item>
         </v-list>
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+        <v-app-bar-nav-icon @click.stop="drawerHandler" />
         <v-toolbar-title>Beehive - Farm Workshop</v-toolbar-title>
     </v-app-bar>
 
@@ -24,7 +24,7 @@
     </v-content>
 
     <v-footer app>
-        <span>&copy; {{ new Date().getFullYear() }}</span>
+        <span>&copy; {{ wonderfulYear }}</span>
     </v-footer>
 </v-app>
 </template>
@@ -35,44 +35,28 @@ export default {
     components: {
         NavigationItem,
     },
-    data: () => ({
-        drawer: true,
-        title: "Dashboard",
-        items: [{
-                icon: "mdi-view-dashboard",
-                title: "Dashboard",
-                to: "/",
-            },
-            {
-                icon: "mdi-donkey",
-                title: "Livestock",
-                to: "/livestock",
-            },
-            {
-                icon: "mdi-face",
-                title: "Employee",
-                to: "/employee",
-            },
-            {
-                icon: "mdi-warehouse",
-                title: "Warehouse",
-                to: "/warehouse",
-            },
-            {
-                icon: null,
-                title: "FAQ",
-                to: "/faq",
-            },
-        ],
-    }),
-    computed: {},
-    methods: {
-        onNavigationClicked(value) {
-            this.title = value;
+    computed: {
+        title() {
+            return this.$store.state.system.contentTitle
         },
+        items() {
+            return this.$store.state.system.menu
+        },
+        drawer() {
+            return this.$store.state.system.drawer
+        },
+        wonderfulYear() {
+            return this.$store.state.system.wonderfulYear
+        }
+    },
+    methods: {
+        drawerHandler() {
+            this.$store.dispatch("system/drawerHandler")
+        }
     },
     created() {
         (this.$vuetify.theme.dark = false), this.$router.push("/");
+        this.$store.dispatch("system/setContentTitle")
     },
 };
 </script>

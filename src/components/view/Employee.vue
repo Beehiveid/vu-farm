@@ -13,16 +13,22 @@
                             </template>
                             <v-card>
                                 <v-card-title>
-                                    <span class="headline">{{ formTitle }}</span>
+                                    <span class="headline">{{
+                                            formTitle
+                                        }}</span>
                                 </v-card-title>
                                 <v-card-text>
                                     <v-container>
                                         <v-row>
                                             <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="editedItem.name" label="Employee Name"></v-text-field>
+                                                <v-text-field v-model="
+                                                            editedItem.name
+                                                        " label="Employee Name"></v-text-field>
                                             </v-col>
                                             <v-col cols="12" sm="6" md="4">
-                                                <v-text-field v-model="editedItem.title" label="Title"></v-text-field>
+                                                <v-text-field v-model="
+                                                            editedItem.title
+                                                        " label="Title"></v-text-field>
                                             </v-col>
                                         </v-row>
                                     </v-container>
@@ -52,86 +58,71 @@
 
 <script>
 export default {
-    components: {
-
-    },
+    components: {},
     data: () => ({
         dialog: false,
-        search: '',
-        employees: [],
+        search: "",
         editedIndex: -1,
         editedItem: {
-            name: '',
-            title: ''
+            name: "",
+            title: "",
         },
         defaultItem: {
-            name: '',
-            title: ''
+            name: "",
+            title: "",
         },
-        headers: [{
-                text: 'Name',
-                align: 'start',
-                value: 'name',
-            },
-            {
-                text: 'Title',
-                value: 'title'
-            },
-            {
-                text: 'Actions',
-                value: 'actions',
-                sortable: false
-            },
-        ]
+
     }),
     computed: {
         formTitle() {
-            return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+            return this.editedIndex === -1 ? "New Item" : "Edit Item";
         },
+        employees() {
+            return this.$store.state.employee.data
+        },
+        headers() {
+            return this.$store.state.employee.table.headers
+        }
     },
 
     watch: {
         dialog(val) {
-            val || this.close()
+            val || this.close();
         },
-    },
-
-    created() {
-        this.initialize()
     },
 
     methods: {
-        initialize() {
-            this.employees = this.$store.state.employees
-        },
-
         editItem(item) {
-            this.editedIndex = this.employees.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialog = true
+            this.editedIndex = this.employees.indexOf(item);
+            this.editedItem = Object.assign({}, item);
+            this.dialog = true;
         },
 
         deleteItem(item) {
-            const index = this.employees.indexOf(item)
-            confirm('Are you sure you want to delete this employee?') && this.employees.splice(index, 1)
+            const index = this.employees.indexOf(item);
+            confirm("Are you sure you want to delete this employee?") &&
+                this.employees.splice(index, 1);
         },
 
         close() {
-            this.dialog = false
+            this.dialog = false;
             setTimeout(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            }, 300)
+                this.editedItem = Object.assign({}, this.defaultItem);
+                this.editedIndex = -1;
+            }, 300);
         },
 
         save() {
             if (this.editedIndex > -1) {
-                Object.assign(this.employees[this.editedIndex], this.editedItem)
+                Object.assign(
+                    this.employees[this.editedIndex],
+                    this.editedItem
+                );
             } else {
-                this.employees.push(this.editedItem)
+                this.employees.push(this.editedItem);
             }
-            this.close()
+            this.close();
         },
     },
-}
+};
 </script>

@@ -58,7 +58,6 @@ export default {
     data: () => ({
         dialog: false,
         search: '',
-        livestocks: [],
         editedIndex: -1,
         editedItem: {
             name: '',
@@ -67,27 +66,18 @@ export default {
         defaultItem: {
             name: '',
             type: ''
-        },
-        headers: [{
-                text: 'Name',
-                align: 'start',
-                value: 'name',
-            },
-            {
-                text: 'Type',
-                value: 'type'
-            },
-            {
-                text: 'Actions',
-                value: 'actions',
-                sortable: false
-            },
-        ]
+        }
     }),
     computed: {
         formTitle() {
             return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
         },
+        headers(){
+            return this.$store.state.livestock.table.headers
+        },
+        livestocks(){
+            return this.$store.state.livestock.data
+        }
     },
 
     watch: {
@@ -96,15 +86,7 @@ export default {
         },
     },
 
-    created() {
-        this.initialize()
-    },
-
     methods: {
-        initialize() {
-            this.livestocks = this.$store.state.livestocks
-        },
-
         editItem(item) {
             this.editedIndex = this.livestocks.indexOf(item)
             this.editedItem = Object.assign({}, item)

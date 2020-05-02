@@ -1,5 +1,5 @@
 <template>
-<v-list-item link v-on:click="render(menu.to)">
+<v-list-item link v-on:click="render">
     <v-list-item-action>
         <v-icon>{{menu.icon}}</v-icon>
     </v-list-item-action>
@@ -13,9 +13,9 @@
 export default {
     props: ['menu'],
     methods: {
-        render(to) {
-            this.$emit('clicked',this.menu.title);
-            this.$router.push(to);
+        render() {
+            this.$store.dispatch("system/setContentTitle", this.menu.title)
+            this.$router.push(this.menu.to);
         }
     },
 }
