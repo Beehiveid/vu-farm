@@ -5,7 +5,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 0,
     employees: [
       {
         title: "Developer",
@@ -28,21 +27,7 @@ export default new Vuex.Store({
     ],
     warehouses: [],
   },
-  mutations: {
-    add(state) {
-      state.count++;
-    },
-    substract(state) {
-      state.count--;
-    },
-  },
-  actions: {
-    add(context) {
-      context.commit("add");
-    },
-    substract(context) {
-      context.commit("substract");
-    },
-  },
+  mutations: {},
+  actions: {},
   getters: {},
 });
